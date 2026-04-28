@@ -18,7 +18,7 @@ The code must be split into multiple scripts and is usually put in a `src` direc
 
 At this step, the code is already looking better. It still needs to be put in a container to be run anywhere. This avoids problems linked to the environment or OS dependencies.
 
-![One container architecture](https://assets-datascientest.s3.eu-we²st-1.amazonaws.com/MLOPS/from_ds_to_mlops_with_docker/3_docker_architecture.png)
+![One container architecture](https://assets-datascientest.s3.eu-west-1.amazonaws.com/MLOPS/from_ds_to_mlops_with_docker/3_docker_architecture.png)
 
 Now, sharing the container is easy, and the code will run on any machine. However, the output of the script is just a file, that is, by default, not saved.
 
