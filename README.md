@@ -28,7 +28,7 @@ Now, sharing the container is easy, and the code will run on any machine. Howeve
 
 Containers are ephemeral. Any data created inside is trapped within it and will be permanently lost if the container is deleted. Volumes allow us to persist this data on the host machine and share it between different containers.
 
-![One container architecture with volume](https://assets-datascientest.s3.eu-west-1.amazonaws.com/MLOPS/from_ds_to_mlops_with_docker/4_docker_with_volume_architecture.png)
+![One container architecture with volumes](https://assets-datascientest.s3.eu-west-1.amazonaws.com/MLOPS/from_ds_to_mlops_with_docker/4_docker_with_volume_architecture_v2.png)
 
 > This architecture is implemented in the `docker-one-container-with-volume` branch.
 
@@ -40,6 +40,6 @@ This allows for a greater degree of flexibility and scalability, as each contain
 
 To manage these multiple containers and their shared volumes without manual intervention, we use Docker Compose. It acts as a manifest that describes how containers and volumes interact.
 
-![Modular architecture](https://assets-datascientest.s3.eu-west-1.amazonaws.com/MLOPS/from_ds_to_mlops_with_docker/5_modular_architecture.png)
+![Modular architecture](https://assets-datascientest.s3.eu-west-1.amazonaws.com/MLOPS/from_ds_to_mlops_with_docker/5_micro_services_architecture_v2.png)
 
 > This architecture is implemented in the `docker-multi-container` branch.

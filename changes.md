@@ -2,6 +2,12 @@
 
 The goal of this branch is to transition from a local Python environment to a **single-container monolithic architecture**. This container encapsulates the entire ML pipeline (collection, processing, training, and evaluation).
 
+![One container architecture](https://assets-datascientest.s3.eu-west-1.amazonaws.com/MLOPS/from_ds_to_mlops_with_docker/3_docker_architecture.png)
+
+The directory structure now looks like this:
+
+![Files structure](https://assets-datascientest.s3.eu-west-1.amazonaws.com/MLOPS/from_ds_to_mlops_with_docker/docker-one-container.png)
+
 The changes were:
 
 1. **Dockerization**: Added a `Dockerfile` to automate environment setup and execution.
