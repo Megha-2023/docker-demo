@@ -1,39 +1,53 @@
-# Branch: docker-one-container
+# Branch: docker-one-container-with-volume
 
-The goal of this branch is to transition from a local Python environment to a **single-container monolithic architecture**. This container encapsulates the entire ML pipeline (collection, processing, training, and evaluation).
+The previous branch `docker-one-container` introduced a single container that encapsulates the entire ML pipeline (collection, processing, training, and evaluation).The main drawback of this approach is that the data produced by the pipeline is lost once the container is stopped. To fix this, we introduce volumes.
+
+This branch adds volumes to the previous one. The overall architecture now looks like this:
+
+![One container architecture with volumes](https://assets-datascientest.s3.eu-west-1.amazonaws.com/MLOPS/from_ds_to_mlops_with_docker/4_docker_with_volume_architecture_v2.png)
+
+The directory structure now looks like this:
+
+![Files structure](https://assets-datascientest.s3.eu-west-1.amazonaws.com/MLOPS/from_ds_to_mlops_with_docker/docker-one-container-with-volume.png)
 
 The changes were:
 
-1. **Dockerization**: Added a `Dockerfile` to automate environment setup and execution.
+1. Adding the VOLUME instruction to the Dockerfile.
 
-2. **Optimization**: Added `.dockerignore` to keep the image lightweight. It prevents the local files (like __pycache__ or older models) from being copied to the image, which can slow down the build process and increase the image size.
-
-## Dockerfile Breakdown
-
-| Instruction | Code | Justification |
-| :--- | :--- | :--- |
-| **Base Image** | `FROM python:3.10-slim` | Uses a lightweight Debian-based Python image to reduce footprint. |
-| **Workdir** | `WORKDIR /app` | Sets a clean dedicated directory inside the container for all project files. |
-| **Copy Deps** | `COPY requirements.txt .` | Copies only the dependency list first to leverage Docker layer caching. |
-| **Install** | `RUN pip install --no-cache-dir -r requirements.txt` | Installs libraries without saving cache files, keeping the image small. |
-| **Copy Code** | `COPY . .` | Copies the rest of the source code and files into the container. |
-| **Execution** | `CMD ["sh", "-c", "python src/collect.py && ..."]` | Defines the default command to run the full pipeline sequentially. |
-
-## How to run
-
-```bash
-docker build -t iris-pipeline .
+```Dockerfile
+VOLUME ["/app/data", "/app/models"]
 ```
 
-This builds the image.
-> -t iris-pipeline : gives a name (tag) to the image.  
-> . : indicates that the Dockerfile is in the current directory.
+This instruction creates two volumes, `/app/data` and `/app/models`, that are mounted to the host machine. This allows the data and models to persist even after the container is stopped.
 
-```bash
-docker run --rm --name iris-run iris-pipeline
+By default, those files are saved somewhere like `/var/lib/docker/volumes/...` on the host machine. VSCode can't see them immediately.
+
+To fix this in a clean way, we used Docker Compose.
+
+2. Creating a docker-compose.yml file:
+
+```yaml
+services:
+  ml-pipeline:
+    build: .
+    volumes:
+      - ./data:/app/data
+      - ./models:/app/models
 ```
 
-This runs the container.
-> --rm : automatically removes the container when it stops.  
-> --name iris-run : gives a name to the container.  
-> iriss-pipeline : is the name of the image to run.
+This compose file basically says:
+
+- Start a service called `ml-pipeline`.  
+- Build the image from the Dockerfile in the current directory.  
+- Mount the `./data` directory on the host to the `/app/data` directory in the container.  
+- Mount the `./models` directory on the host to the `/app/models` directory in the container.  
+
+Because of this, the project now gets launched this way:
+
+```bash
+docker compose up
+```
+
+which is cleaner than the previous one.
+
+Don't forget to run `docker compose down` to stop the container.
