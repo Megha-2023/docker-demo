@@ -8,7 +8,7 @@ This branch adds volumes to the previous one. The overall architecture now looks
 
 The directory structure now looks like this:
 
-![Files structure](https://assets-datascientest.s3.eu-west-1.amazonaws.com/MLOPS/from_ds_to_mlops_with_docker/docker-one-container-with-volume-v2.png)
+![Files structure](https://assets-datascientest.s3.eu-west-1.amazonaws.com/MLOPS/from_ds_to_mlops_with_docker/docker-one-container-with-volume-v3.png)
 
 The changes were:
 
