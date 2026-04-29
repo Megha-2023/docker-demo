@@ -1,6 +1,35 @@
 services:
-  ml-pipeline:
+  collect:
     build: .
+    command: python src/collect.py
+    volumes:
+      - ./data:/app/data
+
+  process:
+    build: .
+    command: python src/processing.py
+    volumes:
+      - ./data:/app/data
+    depends_on:
+      collect:
+        condition: service_completed_successfully
+
+  train:
+    build: .
+    command: python src/train.py
     volumes:
       - ./data:/app/data
       - ./models:/app/models
+    depends_on:
+      process:
+        condition: service_completed_successfully
+
+  evaluate:
+    build: .
+    command: python src/eval.py
+    volumes:
+      - ./data:/app/data
+      - ./models:/app/models
+    depends_on:
+      train:
+        condition: service_completed_successfully

@@ -4,3 +4,8 @@ __pycache__/
 .venv/
 data/
 models/
+Dockerfile
+docker-compose.yml
+changes.md
+README.md
+overall_project.ipynb
