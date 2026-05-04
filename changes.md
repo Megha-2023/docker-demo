@@ -8,6 +8,8 @@ The directory structure now looks like this:
 
 ![Files structure](https://assets-datascientest.s3.eu-west-1.amazonaws.com/MLOPS/from_ds_to_mlops_with_docker/docker-one-container.png)
 
+> Notice that the jupyter notebook is shown as a file although it is in a folder. This is just to get a lighter display.
+
 The changes were:
 
 1. **Dockerization**: Added a `Dockerfile` to automate environment setup and execution.
