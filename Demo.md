@@ -95,7 +95,7 @@ The directory structure now looks like this:
 
 **Optimization**: Used .dockerignore to keep the image lightweight. It prevents the local files (like pycache or older models) from being copied to the image, which can slow down the build process and increase the image size.
 
-## 2. Docker Container with Volumes
+## 3. Docker Container with Volumes
 The main drawback of Docker Container is that the data produced by the pipeline is lost once the container is stopped. To fix this, we introduce volumes.
 
 ### What are Volumes?
@@ -133,7 +133,7 @@ To fix this in a clean way, we use Docker Compose.
 
 <img src="https://assets-datascientest.s3.eu-west-1.amazonaws.com/MLOPS/from_ds_to_mlops_with_docker/docker-one-container-with-volume-v3.png" alt="Files structure" width="60%" style="opacity: 0.9;">
 
-## 3. Docker Compose : Mulitple Containers
+## 4. Docker Compose : Mulitple Containers
 
 Docker Compose is a tool that lets you define and run multiple Docker containers together using a single configuration file called docker-compose.yml.
 
