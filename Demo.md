@@ -1,6 +1,12 @@
-# Using Docker for MLOPs
+# Introduction to  Docker for MLOPs
 
-## 1. Jupyter Notebook to Scripts
+## Concepts Covered:
+- Jupyteer Notebooks to Scripts (Modularization)
+- Local Environment to Docker Container (Containerization)
+- Docker Container with Volumes
+- Docker Compose : Mulitple Containers
+
+## 1. Jupyter Notebooks to Scripts (Modularization)
 
 ```mermaid
 flowchart LR
@@ -33,7 +39,7 @@ flowchart TD
     end
 ```
 
-## 2. From Local Environment to Docker Container
+## 2. Local Environment to Docker Container (Containerization)
 
 Issues faced in case of portability:
 - Python version mismatch
@@ -161,11 +167,20 @@ flowchart TD
         B --> C
     end
 ```
+
+We can think of the architecture like this:
+
+<img src="https://assets-datascientest.s3.eu-west-1.amazonaws.com/MLOPS/from_ds_to_mlops_with_docker/docker-multi-container.png" alt="Files structure" width="60%" style="opacity: 0.9;">
+
 The entire pipeline can be executed by a single command.
 
 ```bash
 docker compose up
 ```
-Don't forget to run docker compose down to stop the containers.
+Don't forget to stop the containers using.
 
-<img src="https://assets-datascientest.s3.eu-west-1.amazonaws.com/MLOPS/from_ds_to_mlops_with_docker/docker-multi-container.png" alt="Files structure" width="60%" style="opacity: 0.9;">
+```bash
+docker compose down
+```
+
+
