@@ -4,17 +4,12 @@
 
 ```mermaid
 flowchart LR
-
-    A(( ))
     B["'Jupter Notebook'
     <br/>data collection
     <br/>data processing
     <br/>model training
     <br/>model evaluation"]
-
-    C(( ))
-    A --> |raw_data.csv| B
-    B --> |metrics.json| C
+    raw_data.csv --> B --> metrics.json
 ```
 
 ### Code Splitted
